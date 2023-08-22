@@ -11,6 +11,7 @@ const query = gql`
       user {
         id
         name
+        email
       }
     }
   }
@@ -28,8 +29,8 @@ function App() {
           {
             data.getTodos.map(todo => <tr key={todo.id}>
               <td>{todo.title}</td>
-              <td>{todo.user?.name}</td>
-              <td>{todo.user?.email}</td>
+              <td>{todo.user.name}</td>
+              <td>{todo.user.email}</td>
             </tr>)
           }
         </tbody>
