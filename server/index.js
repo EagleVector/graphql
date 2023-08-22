@@ -1,12 +1,12 @@
-const express = require('express');
-const { ApolloServer } = require('@apollo/server');
-const { expressMiddleware } = require('@apollo/server/express4');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const { default: axios } = require('axios');
+const express = require("express");
+const { ApolloServer } = require("@apollo/server");
+const { expressMiddleware } = require("@apollo/server/express4");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const { default: axios } = require("axios");
 
-const { USERS } = require('./user');
-const { TODOS } = require('./todo');
+const { USERS } = require("./user");
+const { TODOS } = require("./todo");
 
 async function startServer() {
   const app = express();
@@ -36,23 +36,22 @@ async function startServer() {
     `,
     resolvers: {
       Todo: {
-        user: (todo) => USERS.find((e) => e.id === todo.id)
+        user: (todo) => USERS.find((e) => e.id === todo.id),
       },
       Query: {
         getTodos: () => TODOS,
 
         getAllUsers: () => USERS,
 
-        getUser: async (parent, { id }) => USERS.find((e) => e.id === id)
-
-      }
-    }
+        getUser: async (parent, { id }) => USERS.find((e) => e.id === id),
+      },
+    },
   });
 
   app.use(bodyParser.json());
   app.use(cors());
 
-  await server.start()
+  await server.start();
 
   app.use("/graphql", expressMiddleware(server));
 

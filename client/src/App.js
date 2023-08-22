@@ -1,6 +1,6 @@
-import './App.css';
-import { useQuery } from '@apollo/client';
-import { gql } from '@apollo/client';
+import "./App.css";
+import { useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
 
 const query = gql`
   query GetTodosWithUser {
@@ -18,21 +18,21 @@ const query = gql`
 `;
 
 function App() {
-  const {data, loading} = useQuery(query);
+  const { data, loading } = useQuery(query);
 
-  if(loading) return <h1>Loading...</h1>;
+  if (loading) return <h1>Loading...</h1>;
 
   return (
     <div className="App">
       <table>
         <tbody>
-          {
-            data.getTodos.map(todo => <tr key={todo.id}>
+          {data.getTodos.map((todo) => (
+            <tr key={todo.id}>
               <td>{todo.title}</td>
               <td>{todo.user.name}</td>
               <td>{todo.user.email}</td>
-            </tr>)
-          }
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
